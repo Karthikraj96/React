@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from "./Header"
+import Header from "./Header/Header"
 
-import Counter from "./Counter"
+import Todo from "./Todo/index.js"
 
 //Functional Component 
 function App() { 
   return (
     <>
       <Header />
-      <Counter />
+      <Todo/>
     </>
   )
 }
