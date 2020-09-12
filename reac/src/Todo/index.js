@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React  from "react"
 import TodoItem from "./TodoItem"
 
 
@@ -48,7 +48,16 @@ class Todo extends React.Component{
         this.setState({"todos" : updatedTodos})
     }
     
-    
+    setTodoReset = (id) =>{
+        let utodos = this.state.todos.map((todo)=>{
+            if(todo.id === id ){
+                todo.desc = "Deleted"
+                todo.done = true
+            }
+            return todo
+        })
+        this.setState({"todos" : utodos})
+    }
 
     render(){
         return (
