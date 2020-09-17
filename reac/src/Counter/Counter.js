@@ -5,7 +5,7 @@ import CounterDisplay from "./CounterDisplay"
 class Counter extends React.Component{
 
     constructor(props){
-        super(props) // Dont worry about this right now
+        super(props) 
         this.state = {
             "counter" :10
         }

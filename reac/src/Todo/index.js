@@ -1,5 +1,6 @@
 import React  from "react"
 import TodoItem from "./TodoItem"
+import DoneItem from "./DoneItem"
 
 
 let data = [
@@ -33,14 +34,14 @@ class Todo extends React.Component{
         }
     }
 
-    setTodoDone = (id) =>{
+    setTodo = (id) =>{
 
 
         console.log("ID", id)
 
         let updatedTodos = this.state.todos.map((todo)=>{
           if(todo.id === id ){
-              todo.done = true
+              todo.done = !todo.done;
           }
           
           return todo
@@ -48,29 +49,26 @@ class Todo extends React.Component{
         this.setState({"todos" : updatedTodos})
     }
     
-    setTodoReset = (id) =>{
-        let utodos = this.state.todos.map((todo)=>{
-            if(todo.id === id ){
-                todo.desc = "Deleted"
-                todo.done = true
-            }
-            return todo
-        })
-        this.setState({"todos" : utodos})
-    }
+  
 
     render(){
         return (
             <div className="container">
-                <div>
-                    <h3> TODO</h3>
-                    
+                <div className="row">
+                <div className="col-md-6 col-lg-6 col-xl-6"> 
+                    <h3> TODO Items</h3>
+                    {
+                        ! this.state.todos.find ( (todo) =>{
+                            return !todo.done
+                        }) && <p>No Todos</p>
+                    }
+
                 {
                     this.state.todos.map(
                         (todo)=>{
                             return (
                                 <>
-                                { !todo.done && <TodoItem todo={todo} setTodoDone={this.setTodoDone} />}
+                                { !todo.done && <TodoItem todo={todo} setTodoDone={this.setTodo} />}
                                 </>
                             )
                         }
@@ -78,20 +76,26 @@ class Todo extends React.Component{
                     
                 }
                 </div>
-                <div>
+                <div className="col-md-6 col-lg-6 col-xl-6">
                     <h3>Done Items</h3>
+                    {
+                        ! this.state.todos.find ( (todo) =>{
+                            return todo.done
+                        }) && <p>No Done Items</p>
+                    }
                     {
                         this.state.todos.map(
                             (todo)=>{
                                 return (
                                     <>
-                                    { todo.done && <TodoItem todo={todo} setTodoReset={this.setTodoReset} />}
+                                    { todo.done && <DoneItem todo={todo} setTodoReset={this.setTodo} />}
                                     </>
                                 )
                             }
                         )
                      }
 
+                </div>
                 </div>
             </div>
         )
@@ -100,14 +104,4 @@ class Todo extends React.Component{
 
 export default Todo
 
-
-/*
-var a = [1,2,4,7,9]
-
-var updatedArray = a.map(  
-    function(ele){
-        return (<p> { ele } </p>)
-    }
-)
-*/
 
