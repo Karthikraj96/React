@@ -1,38 +1,27 @@
 import React  from "react"
 import TodoItem from "./TodoItem"
-import DoneItem from "./DoneItem"
+import CompletedItem from "./DoneItem"
+import axios from "axios"
 
 
-let data = [
-    {
-        id : 1,
-        desc : "Buy Milk",
-        done : false
-    },
-    {
-        id : 2,
-        desc : "Be awsome",
-        done : false
-    },
-    {
-        id : 3,
-        desc : "Learn react",
-        done : false
-    },
-    {
-        id : 4,
-        desc : "Sleep Yesterday",
-        done : true
-    },
-]
 
 class Todo extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            "todos" : data
+            "todos" : [],
+            "loading" : true
         }
     }
+    componentDidMount(){
+        axios.get('http://jsonplaceholder.typicode.com/todos')
+        .then((response)=>{
+           this.setState({"todos":response.data,"loading":false})
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+}
 
     setTodo = (id) =>{
 
@@ -41,7 +30,7 @@ class Todo extends React.Component{
 
         let updatedTodos = this.state.todos.map((todo)=>{
           if(todo.id === id ){
-              todo.done = !todo.done;
+              todo.completed = !todo.completed;
           }
           
           return todo
@@ -54,49 +43,53 @@ class Todo extends React.Component{
     render(){
         return (
             <div className="container">
-                <div className="row">
-                <div className="col-md-6 col-lg-6 col-xl-6"> 
-                    <h3> TODO Items</h3>
-                    {
-                        ! this.state.todos.find ( (todo) =>{
-                            return !todo.done
-                        }) && <p>No Todos</p>
-                    }
-
                 {
-                    this.state.todos.map(
-                        (todo)=>{
-                            return (
-                                <>
-                                { !todo.done && <TodoItem todo={todo} setTodoDone={this.setTodo} />}
-                                </>
-                            )
-                        }
-                    )
-                    
-                }
-                </div>
-                <div className="col-md-6 col-lg-6 col-xl-6">
-                    <h3>Done Items</h3>
-                    {
-                        ! this.state.todos.find ( (todo) =>{
-                            return todo.done
-                        }) && <p>No Done Items</p>
-                    }
-                    {
-                        this.state.todos.map(
-                            (todo)=>{
-                                return (
-                                    <>
-                                    { todo.done && <DoneItem todo={todo} setTodoReset={this.setTodo} />}
-                                    </>
-                                )
-                            }
-                        )
-                     }
+                    this.state.loading ? <h3>Loading</h3> 
+                        : <div className="row">
+                            <div className="col-md-6 col-lg-6 col-xl-6">
+                                <h3> TODO Items</h3>
+                                {
+                                    !this.state.todos.find((todo) => {
+                                        return !todo.completed
+                                    }) && <p>No Todos</p>
+                                }
 
-                </div>
-                </div>
+                                {
+                                    this.state.todos.map(
+                                        (todo) => {
+                                            return (
+                                                <>
+                                                    {!todo.completed && <TodoItem todo={todo} setTodocompleted={this.setTodo} />}
+                                                </>
+                                            )
+                                        }
+                                    )
+
+                                }
+                            </div>
+                            <div className="col-md-6 col-lg-6 col-xl-6">
+                                <h3>completed Items</h3>
+                                {
+                                    !this.state.todos.find((todo) => {
+                                        return todo.completed
+                                    }) && <p>No completed Items</p>
+                                }
+                                {
+                                    this.state.todos.map(
+                                        (todo) => {
+                                            return (
+                                                <>
+                                                    {todo.completed && <CompletedItem todo={todo} setTodoReset={this.setTodo} />}
+                                                </>
+                                            )
+                                        }
+                                    )
+                                }
+
+                            </div>
+                        </div>
+                }
+                
             </div>
         )
     }

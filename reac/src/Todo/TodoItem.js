@@ -7,8 +7,8 @@ function TodoItem (props){
     return (
         <div className="card">
             <div className="card-body">
-                <h4 className="card-text">{todo.desc}</h4>
-                <button onClick={ (event)=>{ props.setTodoDone(todo.id) }  } className="btn btn-success">Done</button>
+                <h4 className="card-text">{todo.title}</h4>
+                <button onClick={ (event)=>{ props.setTodocompleted(todo.id) }  } className="btn btn-success">Done</button>
                 <button className="btn btn-danger">Delete</button>
             </div>
         </div>
