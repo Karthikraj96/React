@@ -10,5 +10,5 @@ export function getTodo (){
     return api.get( "/todos")
 }
 export function saveTodo(data){
-    return api.post("/todos",data)
+    return api.post("/",data)
 }
