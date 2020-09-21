@@ -1,7 +1,8 @@
 import React  from "react"
 import TodoItem from "./TodoItem"
 import CompletedItem from "./DoneItem"
-import axios from "axios"
+import { getTodo, saveTodo } from "../Api"
+import TodoCreate from './TodoCreate.js'
 
 
 
@@ -14,7 +15,7 @@ class Todo extends React.Component{
         }
     }
     componentDidMount(){
-        axios.get('http://jsonplaceholder.typicode.com/todos')
+        getTodo()
         .then((response)=>{
            this.setState({"todos":response.data,"loading":false})
         })
@@ -22,7 +23,15 @@ class Todo extends React.Component{
             console.log(error)
         })
 }
-
+    createTodo =(data) =>{
+        saveTodo(data)
+        .then((response)=>{
+            console.log(response)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
     setTodo = (id) =>{
 
 
@@ -43,6 +52,7 @@ class Todo extends React.Component{
     render(){
         return (
             <div className="container">
+                <TodoCreate createTodo={this.createTodo}/>
                 {
                     this.state.loading ? <h3>Loading</h3> 
                         : <div className="row">
