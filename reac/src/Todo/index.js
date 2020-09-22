@@ -26,7 +26,8 @@ class Todo extends React.Component{
     createTodo =(data) =>{
         saveTodo(data)
         .then((response)=>{
-            console.log(response)
+            console.log(response.data)
+            this.setState({"todos":[ response.data ,...this.state.todos]})
         })
         .catch((err)=>{
             console.log(err)
