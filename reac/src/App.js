@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "./Header/Header"
 import Counter from "./Counter/Counter.js"
+import Counter2 from"./Hooks/Counter/Counter.js"
 import Todo from "./Todo/index.js"
 import {
   BrowserRouter as Router,
@@ -35,6 +36,11 @@ function App() {
                     Todo
                   </Link>
                 </li>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/con2">
+                    Counter Hooks
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/counter">
                     Counter
@@ -47,6 +53,9 @@ function App() {
           <Switch>
             <Route path="/todo">
               <Todo />
+            </Route>
+            <Route path="/con2">
+              <Counter2 />
             </Route>
 
             <Route path="/counter">
