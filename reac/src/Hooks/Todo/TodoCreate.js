@@ -1,12 +1,13 @@
 import React , { useState} from "react"
 
 function TodoCreate (props){
-    let [title,setTitle] = useState("");
+    const [title,setTitle] = useState("");
+    const ref =props.createTodo()
 
     function handleOnSubmit  (event) {
         
         event.preventDefault()
-        props.createTodo(title)
+        ref(title);
     }
     function titleChange (event) {
         console.log(event.target.value)

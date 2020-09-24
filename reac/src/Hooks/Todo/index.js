@@ -4,9 +4,9 @@ import CompletedItem from "./DoneItem"
 import { getTodo, saveTodo } from "../../Api.js"
 import TodoCreate from './TodoCreate.js'
 
-    let Todo = () => {
-    let [todos,setTodos] = useState([]);
-    let [loading,setLoading] = useState(true);
+    const Todo = () => {
+    const [todos,setTodos] = useState([]);
+    const [loading,setLoading] = useState(true);
 
     useEffect(()=>{
         getTodo()
