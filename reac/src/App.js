@@ -3,6 +3,7 @@ import Header from "./Header/Header"
 import Counter from "./Counter/Counter.js"
 import Counter2 from"./Hooks/Counter/Counter.js"
 import Todo from "./Todo/index.js"
+import Todo2 from "./Hooks/Todo/index.js"
 import {
   BrowserRouter as Router,
   Switch,
@@ -37,6 +38,11 @@ function App() {
                   </Link>
                 </li>
                 <li className="nav-item active">
+                  <Link className="nav-link" to="/todo2">
+                    Todo 2 Hooks
+                  </Link>
+                </li>
+                <li className="nav-item active">
                   <Link className="nav-link" to="/con2">
                     Counter Hooks
                   </Link>
@@ -53,6 +59,9 @@ function App() {
           <Switch>
             <Route path="/todo">
               <Todo />
+            </Route>
+            <Route path="/todo2">
+              <Todo2 />
             </Route>
             <Route path="/con2">
               <Counter2 />
