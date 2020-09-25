@@ -1,7 +1,7 @@
 import React , { useState} from "react"
 
 function TodoCreate (props){
-    const [title,setTitle] = useState("");
+    const [title,setTitle] = useState("sample");
     const ref =props.createTodo()
 
     function handleOnSubmit  (event) {

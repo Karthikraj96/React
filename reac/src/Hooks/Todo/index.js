@@ -4,29 +4,34 @@ import CompletedItem from "./DoneItem"
 import { getTodo, saveTodo } from "../../Api.js"
 import TodoCreate from './TodoCreate.js'
 
-    const Todo = () => {
-    const [todos,setTodos] = useState([]);
-    const [loading,setLoading] = useState(true);
+    function Todo  ()  
+    {
+    let [todos,setTodos] = useState([]);
+    let [loading,setLoading] = useState(true);
 
-    useEffect(()=>{
+    useEffect(function(){
+        let isMounted =true;
         getTodo()
-        .then((response)=>{
+        .then(function(response){
            console.log(response.data);
+           if(isMounted){
            setTodos(response.data);
            setLoading(false)
+           }
         })
-        .catch((error)=>{
+        .catch(function(error){
             console.log(error)
         })
+        return()=>{isMounted=false};
     },[])
 
      function createTodo (data) {
         saveTodo(data)
-        .then((response)=>{
+        .then(function(response){
             console.log(response.data)
             setTodos(response.data,...todos);
         })
-        .catch((err)=>{
+        .catch(function(err){
             console.log(err)
         })
     }
@@ -36,13 +41,13 @@ import TodoCreate from './TodoCreate.js'
 
         console.log("ID", id)
 
-        let updatedTodos = todos.map((todo=>{
+        let updatedTodos = todos.map(function(todo) {
           if(todo.id === id ){
               todo.completed = !todo.completed;
           }
           
           return todo
-        }))
+        })
         setTodos(updatedTodos);
     }
 
@@ -56,41 +61,41 @@ import TodoCreate from './TodoCreate.js'
                         <div className="col-md-6 col-lg-6 col-xl-6">
                             <h3> TODO Items</h3>
                             {
-                                !todos.find((todo=>  {
+                                !todos.find(function(todo)  {
                                     return !todo.completed
-                                })) && <p>No Todos</p>
+                                }) && <p>No Todos</p>
                             }
 
                             {
                                 todos.map(
-                                    (todo=>  {
+                                    function(todo)  {
                                         return (
                                             <>
                                                 {!todo.completed && <TodoItem todo={todo} setTodocompleted={setTodo} />}
                                             </>
                                         )
                                     })
-                                )
+                                
 
                             }
                         </div>
                         <div className="col-md-6 col-lg-6 col-xl-6">
                             <h3>completed Items</h3>
                             {
-                                !todos.find((todo =>  {
+                                !todos.find(function(todo)  {
                                     return todo.completed
-                                })) && <p>No completed Items</p>
+                                }) && <p>No completed Items</p>
                             }
                             {
                                 todos.map(
-                                    (todo=> {
+                                    function(todo) {
                                         return (
                                             <>
                                                 {todo.completed && <CompletedItem todo={todo} setTodoReset={setTodo} />}
                                             </>
                                         )
                                     }
-                                ))
+                                )
                             }
 
                         </div>
