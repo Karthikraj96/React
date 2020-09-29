@@ -4,19 +4,21 @@ import Counter from "./Counter/Counter.js"
 import Counter2 from"./Hooks/Counter/Counter.js"
 import Todo from "./Todo/index.js"
 import Todo2 from "./Hooks/Todo/index.js"
+import {Provider} from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
- 
+ import {store} from "./store.js"
 
 function App() { 
   return (
-    <>
+    <Provider store={store}>
       <Header />
       <Router>
+    
         <div>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <button
@@ -76,8 +78,9 @@ function App() {
             </Route>
           </Switch>
         </div>
+
       </Router>
-    </>
+    </Provider>
   );
 }
 

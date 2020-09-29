@@ -1,3 +1,23 @@
+/* redux*/
+import React from 'react'
+import CounterDisplay from "./CounterDisplay"
+import {useDispatch,useSelector} from "react-redux"
+import {incrementcounter,decrementCounter,resetCounter,defaultCounter} from "../../store"
+
+export default function Counter(){
+    let dispatch = useDispatch()
+    let counter = useSelector((state)=>{return state.counter})
+    return (
+        <div className="container">
+            <CounterDisplay  title="Counter" />
+            <br/>
+            <button onClick={ ()=>{counter === 0 ?dispatch(defaultCounter()):dispatch(decrementCounter())}}className="btn btn-danger">-</button>
+            <button onClick={ ()=>{dispatch(incrementcounter())}} className="btn btn-success">+</button>
+            <button onClick={ ()=>{dispatch(resetCounter())}}className="btn btn-default" >Reset</button>
+        </div>
+    )
+}
+/* Hooks
 import React,{ useState }  from 'react'
 import CounterDisplay from "./CounterDisplay"
 
@@ -14,7 +34,8 @@ export default function Counter(){
         </div>
     )
 }
-/*
+*/
+/* Class
 class Counter2 extends Component{
 
     constructor(props){
