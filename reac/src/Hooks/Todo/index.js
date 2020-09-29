@@ -45,6 +45,17 @@ let Todo = () => {
         }))
         setTodos(updatedTodos);
     }
+    function deleteTodo  (id) {
+
+
+        console.log("ID", id)
+
+        let updatedTodos = todos.map((todo=>{
+            return todo.id !== id 
+          
+        }))
+        setTodos(updatedTodos);
+    }
 
 
     return (
@@ -66,7 +77,7 @@ let Todo = () => {
                                     (todo=>  {
                                         return (
                                             <>
-                                                {!todo.completed && <TodoItem todo={todo} setTodocompleted={setTodo} />}
+                                                {!todo.completed && <TodoItem todo={todo} setTodocompleted={setTodo} deleteTodo={deleteTodo} />}
                                             </>
                                         )
                                     })
@@ -86,7 +97,7 @@ let Todo = () => {
                                     (todo=> {
                                         return (
                                             <>
-                                                {todo.completed && <CompletedItem todo={todo} setTodoReset={setTodo} />}
+                                                {todo.completed && <CompletedItem todo={todo} setTodoReset={setTodo} deleteTodo={deleteTodo}/>}
                                             </>
                                         )
                                     }
