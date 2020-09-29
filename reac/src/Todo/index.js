@@ -47,6 +47,17 @@ class Todo extends React.Component{
         })
         this.setState({"todos" : updatedTodos})
     }
+    deleteTodo = (id) =>{
+
+
+        console.log("ID", id)
+
+        let updatedTodos = this.state.todos.filter((todo)=>{
+          
+            return todo.id !== id;
+        })
+        this.setState({"todos" : updatedTodos})
+    }
     
   
 
@@ -70,7 +81,7 @@ class Todo extends React.Component{
                                         (todo) => {
                                             return (
                                                 <>
-                                                    {!todo.completed && <TodoItem todo={todo} setTodocompleted={this.setTodo} />}
+                                                    {!todo.completed && <TodoItem todo={todo} setTodocompleted={this.setTodo} deleteTodo={this.deleteTodo} />}
                                                 </>
                                             )
                                         }
@@ -90,7 +101,7 @@ class Todo extends React.Component{
                                         (todo) => {
                                             return (
                                                 <>
-                                                    {todo.completed && <CompletedItem todo={todo} setTodoReset={this.setTodo} />}
+                                                    {todo.completed && <CompletedItem todo={todo} setTodoReset={this.setTodo} deleteTodo={this.deleteTodo} />}
                                                 </>
                                             )
                                         }
