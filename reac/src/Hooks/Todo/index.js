@@ -4,6 +4,8 @@ import CompletedItem from "./DoneItem"
 import { getTodo, saveTodo } from "../../Api.js"
 import TodoCreate from './TodoCreate.js'
 
+
+
 let Todo = () => {
     let [todos,setTodos] = useState([]);
     let [loading,setLoading] = useState(true);
@@ -20,11 +22,14 @@ let Todo = () => {
         })
     },[])
 
-     function createTodo (data) {
-        saveTodo(data)
+     let createTodo = (data) => {
+         
+        console.log(typeof(data))
+        console.log(data)
+       saveTodo(data)
         .then((response)=>{
-            console.log(response.data)
-            setTodos(response.data,...todos);
+            console.log(response)
+            setTodos([response.data,...todos]);
         })
         .catch((err)=>{
             console.log(err)
@@ -45,7 +50,12 @@ let Todo = () => {
         }))
         setTodos(updatedTodos);
     }
-
+    function deleteTodo(id){
+        let updatedTodos =todos.filter((todo)=>{
+            return todo.id !==id;
+        })
+        setTodos(updatedTodos);
+    }
 
     return (
         <div className="container">
@@ -66,7 +76,7 @@ let Todo = () => {
                                     (todo=>  {
                                         return (
                                             <>
-                                                {!todo.completed && <TodoItem todo={todo} setTodocompleted={setTodo} />}
+                                                {!todo.completed && <TodoItem todo={todo} setTodocompleted={setTodo} deleteTodo={deleteTodo}/>}
                                             </>
                                         )
                                     })
@@ -86,7 +96,7 @@ let Todo = () => {
                                     (todo=> {
                                         return (
                                             <>
-                                                {todo.completed && <CompletedItem todo={todo} setTodoReset={setTodo} />}
+                                                {todo.completed && <CompletedItem todo={todo} setTodoReset={setTodo} deleteTodo={deleteTodo}/>}
                                             </>
                                         )
                                     }

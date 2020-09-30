@@ -2,7 +2,7 @@
 import React from 'react'
 import CounterDisplay from "./CounterDisplay"
 import {useDispatch,useSelector} from "react-redux"
-import {incrementcounter,decrementCounter,resetCounter,defaultCounter} from "../../store"
+import {incrementCounter,decrementCounter,resetCounter,defaultCounter} from "../../store"
 
 export default function Counter(){
     let dispatch = useDispatch()
@@ -12,7 +12,7 @@ export default function Counter(){
             <CounterDisplay  title="Counter" />
             <br/>
             <button onClick={ ()=>{counter === 0 ?dispatch(defaultCounter()):dispatch(decrementCounter())}}className="btn btn-danger">-</button>
-            <button onClick={ ()=>{dispatch(incrementcounter())}} className="btn btn-success">+</button>
+            <button onClick={ ()=>{dispatch(incrementCounter())}} className="btn btn-success">+</button>
             <button onClick={ ()=>{dispatch(resetCounter())}}className="btn btn-default" >Reset</button>
         </div>
     )

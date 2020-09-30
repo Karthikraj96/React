@@ -1,24 +1,18 @@
-import React from 'react';
-import Header from "./Header/Header"
-import Counter from "./Counter/Counter.js"
-import Counter2 from"./Hooks/Counter/Counter.js"
-import Todo from "./Todo/index.js"
-import Todo2 from "./Hooks/Todo/index.js"
-import {Provider} from 'react-redux'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
- import {store} from "./store.js"
+import React from "react";
+import Header from "./Header/Header";
+import Counter from "./Counter/Counter.js";
+import Counter2 from "./Hooks/Counter/Counter.js";
+import Todo from "./Todo/index.js";
+import Todo2 from "./Hooks/Todo/index.js";
+import Todo3 from "./ReduxTodo/index.js";
 
-function App() { 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+function App() {
   return (
-    <Provider store={store}>
+    <div>
       <Header />
       <Router>
-    
         <div>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <button
@@ -37,6 +31,11 @@ function App() {
                 <li className="nav-item active">
                   <Link className="nav-link" to="/todo">
                     Todo
+                  </Link>
+                </li>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/todo3">
+                    Todo Redux
                   </Link>
                 </li>
                 <li className="nav-item active">
@@ -68,19 +67,20 @@ function App() {
             <Route path="/con2">
               <Counter2 />
             </Route>
+            <Route path="/todo3">
+              <Todo3 />
+            </Route>
 
             <Route path="/counter">
               <Counter />
             </Route>
-
             <Route path="/">
               <Todo />
             </Route>
           </Switch>
         </div>
-
       </Router>
-    </Provider>
+    </div>
   );
 }
 

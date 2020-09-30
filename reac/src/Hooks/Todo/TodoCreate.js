@@ -1,18 +1,22 @@
 import React , { useState} from "react"
 
 function TodoCreate (props){
-    let [title,setTitle] = useState("");
+    let [title,setTitle] = useState({});
+    let rf=props.createTodo
     
 
     function titleChange (event) {
-     
+        
        setTitle( event.target.value);
+        console.log(typeof(title))
+      
     }
     let handleOnSubmit  = (event) =>{
-        console.log(title)
-        let data = title;
+        
+        let data = {"title" : title};
+      
+        rf(data)
         event.preventDefault()
-        props.createTodo(data)
 
         
     }
