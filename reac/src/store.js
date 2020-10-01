@@ -1,6 +1,6 @@
 import {createStore,combineReducers,applyMiddleware,compose} from "redux"
 import thunk from "redux-thunk";
-import {saveTodo,getTodo} from "./Api.js"
+import {getTodo} from "./Api.js"
 
 // Action to make
 export let incrementCounter =()=>{
@@ -15,13 +15,10 @@ export let resetCounter = () =>{
 export let defaultCounter = () =>{
     return {"type": "default" }
 }
-export let setTodoComplete = (id) =>{
-    return {"type":"setTodoComplete",id}
-}
-export let set2Todo = (id) =>{
-    return {"type":"set2Todo","id":id}
-}
 
+export let updateTodos =(data)=>{
+    return {"type":"updateTodos","data":data}
+}
 
 export let setTodos = (data) => {
     return { "type" : "setTodos" , "data" : data}
@@ -52,21 +49,7 @@ const counter =(state = 10,action) =>{
 
 let todos =(state =[],action) =>{
     switch(action.type){
-        case "setTodoComplete":
-            return function setTodo(id) {
-              console.log("ID", id);
-
-              let updatedTodos = todos.map((todo) => {
-                if (todo.id === id) {
-                  return { ...todo, completed: !todo.completed };
-                }
-
-                return todo;
-              });
-              todos = updatedTodos;
-            }
-        case "set2Todo" :
-            return  action.id
+        
     
                 
            
