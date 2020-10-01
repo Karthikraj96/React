@@ -1,11 +1,16 @@
 import React from 'react';
 import './App.css';
+import HomePage from "./Pages/Homepage/homePage.Comp"
 
-function App(props) {
-  console.log(props)
+function App() {
+  
   return (
-  <p>Hello {props.to} From {props.from} how is it </p>
-  );
+    <div>
+      <HomePage/>
+    </div>
+         
+  )
+  
 }
 
 export default App;
